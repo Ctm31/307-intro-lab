@@ -1,18 +1,16 @@
 {
-  "name": "307-intro-lab",
+  "name": "express-backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run dev -w packages/react-frontend"
+    "dev": "npx nodemon backend.js",
+    "start": "node backend.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "nodemon": "^3.1.14"
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
