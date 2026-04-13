@@ -47,7 +47,7 @@ const findUserByNameJob = (name, job) => {
 };
 
 const findUserById = (id) =>
-  users["users_list"].find((user) => user["id"] === id);
+  users["users_list"].find((user) => user["id"] == id);
 
 const addUser = (user) => {
   users["users_list"].push(user);
@@ -55,8 +55,12 @@ const addUser = (user) => {
 };
 
 const removeUser = (id) => {
-    users["users_list"] = users["users_list"].filter(user => user.id !== id);
+    users["users_list"] = users["users_list"].filter(user => user.id != id);
 };
+
+const genId = () => {
+    return Math.floor(Math.random() * 1000)
+}
 
 app.use(cors());
 app.use(express.json());
@@ -93,8 +97,10 @@ app.get("/users/:id", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
+  userToAdd["id"] = genId();
+  console.log(userToAdd);
   addUser(userToAdd);
-  res.send();
+  res.status(201).send(userToAdd);
 });
 
 app.delete("/users/:id", (req, res) => {
@@ -104,6 +110,7 @@ app.delete("/users/:id", (req, res) => {
     res.status(404).send("Resource not found.");
   } else {
     removeUser(id);
+    res.status(204).send();
   }
 });
 
